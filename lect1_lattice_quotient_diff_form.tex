@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amssymb,fullpage,enumerate,bm,hyperref}
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}
+\newtheorem{ex}{Exercise}
+\title{Lecture 1\\Why didn't I learn about differential forms?}
+\author{TM}
+\date{\today}
+\begin{document}
+\section*{Introduction}
+Friends, friends. I have a confession to make. I never actually taught myself any differential geometry. I'm a faker. My whole professional life is a lie. I should just stick to dumb as rocks programming and write {\tt /r/programmerhumor} memes.
+
+But, I've never been one to stick to the sane option. So I'll do the insane thing -- teach myself differential geometry by way of giving lectures.
+\section*{Motivation}
+The thing is though. I have a reason to learn it. In order to actually give a full definition of modular forms in the geometrically most appropriate way, you really need to work with differential forms.
+
+So what do I mean by the ``geometrically most appropriate way''? Well, I mean the way Nick Katz does it in his ground-breaking (or so I've been told) essay ``$p$-adic Properties of Modular Forms'' from 1972.
+
+In order to begin to understand modular forms in his way, you need to start by viewing elliptic curves as ``tori''. Or to be more concrete, as quotients
+\[\mathbb{C}/(\text{lattice in $\mathbb{C}$}).\]
+What I mean by lattice in $\mathbb{C}$ here is an additive group of the form
+\[\mathbb{Z}\omega_1+\mathbb{Z}\omega_2,\]
+where $\omega_1$ and $\omega_2$ are points in the complex plane, not on the same line.
+
+Now, an arbitrary point in the complex plane can be shifted in terms of integer multiples of $\omega_1$ and $\omega_2$ so that it sits inside the parallellogram spanned by $\omega_1$ and $\omega_2$. Take a look at the graphic below.
+\begin{figure}[h]
+  \centering
+  {\tt Insert TikZ graphic here.}
+\end{figure}
+
+What this means is that $\mathbb{C}/\text{lattice}$ is topologically the same as a parallellogram with sides identified in an orientation-preserving way.
+
+\begin{figure}[h]
+  \centering
+  {\tt Insert TikZ graphic here.}
+\end{figure}
+
+From topology we know this is homeomorphic to a torus. Hence, certainly $\mathbb{C}/\text{lattice}$ must be a $2$-dimensional manifold.
+
+Is it though? (Answer: yes, of course.)
+\section*{What's Spivak say?}
+Spivak starts by defining a {\tt diffeomorphism}.
+\begin{defi}
+  Let $U,V\subseteq\mathbb{R}^n$ are open (here and henceforth in the Euclidean topology). Then a differentiable function $h:U\to V$ (here and henceforth, a $C^\infty$ function) with a differentiable inverse $h^{-1}:V\to U$ is called a {\tt diffeomorphism}.
+\end{defi}
+From this ey (Spivak pronoun) defines a $k$-dimensional manifold.
+\begin{defi}
+  Let $M\subset\mathbb{R}^n$ and $k$ a non-negative integer. Then $M$ is called a $k$-dimensional manifold if for every point $x\in M$ it holds that
+  \begin{quotation}
+    There exists an open set $\mathbb{R}^n\supseteq U\ni x$ and an open set $V\subseteq\mathbb{R}^n$ and a diffeomorphism $h:U\to V$ satisfying
+    \[h(U\cap M)=V\cap(\mathbb{R}^k\times\{\mathbf{0}\}).\]
+  \end{quotation}
+\end{defi}
+Spivak tells us to think of this $U\cap M$ being up to diffeomorphism the same as $\mathbb{R}^k\times\{\mathbf{0}\}$.
+
+For funsies, let's show that $\mathbb{T}^2$ indeed is a $2$-manifold.
+\begin{ex}
+  Show that $\mathbb{T}^2$ is a $2$-manifold.
+\end{ex}
+\begin{proof}[Solution]
+  First we need to settle on which definition of $\mathbb{T}^2$ we want to use. Since we want it to sit in $\mathbb{R}^n$ for some $n$, we should probably use the good ole ``donut''-definition, which makes it sit in $\mathbb{R}^3$.
+
+  We define it parametrically:
+  \[\begin{cases}
+    x(\theta,\phi)=(R+r\cos\theta)\cos\phi\\
+    y(\theta,\phi)=(R+r\cos\theta)\sin\phi\\
+    z(\theta,\phi)=r\sin\theta.
+  \end{cases}\]
+  Where $0\leq\theta,\phi<2\pi$ and $R$ is ``the distance from the center of the tube to the center of the torus'' and $r$ is ``the radius of the tube''. Obviously the particular choice of $R$ and $r$ is irrelevant.
+
+  In other words
+  \[\mathbb{T}^2=\{(x(\theta,\phi),y(\theta,\phi),z(\theta,\phi)):(\theta,\phi)\in [0,2\pi)^2\}.\]
+
+  \begin{figure}[h]
+    \centering
+    {\tt TikZ me!}
+  \end{figure}
+  
+  Let now $(x,y,z)\in\mathbb{T}^2$ be arbitrary.
+\end{proof}
+\end{document}
