@@ -1,0 +1,70 @@
+\def\pgfsysdriver{pgfsys-dvipdfm.def}
+%Bug in xelatex, see https://github.com/josephwright/beamer/issues/337
+\documentclass[usenames,dvipsnames]{beamer}
+\usepackage{tikz}
+\usepackage{amsmath,amsthm,amssymb,enumerate,bbm,hyperref,mathtools,xeCJK,xpinyin,tikz-cd,stmaryrd,adjustbox,lscape,listings,changepage,epigraph,xcolor}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usecolortheme{crane}
+
+\usepackage{pgfpages}
+\setbeamertemplate{note page}[plain]
+\setbeameroption{show notes on second screen=right}
+
+\usepackage{tkz-euclide,tkz-fct}
+
+\newcommand\dhrightarrow{%
+  \mathrel{\ooalign{$\rightarrow$\cr%
+  $\mkern3.5mu\rightarrow$}}
+}
+
+\newcommand\dhxrightarrow[2][]{%
+  \mathrel{\ooalign{$\xrightarrow[#1\mkern4mu]{#2\mkern4mu}$\cr%
+  \hidewidth$\rightarrow\mkern4mu$}}
+}
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}
+\newtheorem{theo}{Theorem}
+
+\title{Elliptic curves, lattices, and some differential geometry}
+\subtitle{A ``modular forms''-y gumbo}
+\author{Tobias Magnusson}
+\institute{Chalmers University of Technology}
+\date{\today}
+\subject{Mathematics}
+\begin{document}
+\begin{frame}[plain]
+\titlepage
+  \note{Thanks Step! So, in my first talk of {\tt TISHK}, I'll talk about something that has been bugging me for ages -- Katz' ``geometric'' definition of modular forms.
+
+  I have been told by an expert of the field that Katz' point of view is {\bf the} way to view modular forms, mainly for the ease of changing your ground field. When doing computations, this will just be the field that your Fourier coefficients belong to.
+
+  There are other ways of changing the ground field (Serre does something cool for example), but from cursorily reading Katz, I can see what it is appealing to many folk. It seems ``simple'' in a way, not as ``ad-hoc''-y as what Serre does.
+
+  The only problem is that it's just ``simple'' if you know all of the involved prerequisites. That's where I'm stumped.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{itemize}
+    \item Classical definition of modular forms.
+    \item Katz' definition.
+    \item Weierstraß' $\mathcal{P}$-function -- elliptic curves are tori.
+    \item Tobias is stumped 1: differential form.
+    \item A concrete example!
+    \item Visualize: {\tt pyqtgraph}.\footnote{Including an interesting proramming problem -- intersecting {\tt MeshData}.}
+    \item Tobias is stumped 2: lattices of periods.
+    \item Next talk -- the Tate curve.
+  \end{itemize}
+  \note{In this talk}
+\end{frame}
+\end{document}

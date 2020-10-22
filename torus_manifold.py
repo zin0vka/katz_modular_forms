@@ -16,16 +16,27 @@ r = 1
 x = (R + r*np.cos(theta))*np.cos(phi)
 y = (R + r*np.cos(theta))*np.sin(phi)
 z = r*np.sin(theta)
-
-
-surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
-                       linewidth=0, antialiased=True)
 #apparently deprecated now
 #ax.hold(True)
 ix = 1500
 jx = 500
-#zorder apparently controls
-print("the pt: "+str((x[ix,jx],y[ix,jx],z[ix,jx]))+"\n")
+#zorder apparently controls which thing is ``drawn first''
+thept = (x[ix,jx],y[ix,jx],z[ix,jx])
+
+#let's make a ball with radius 0.1 and center in ``thept''
+theta1 = np.arange(0, np.pi, np.pi/1000)
+phi1 = np.arange(0, 2*np.pi, np.pi/1000)
+theta1, phi1 = np.meshgrid(theta1,phi1)
+r = 0.5
+x1 = thept[0] + r*np.sin(theta1)*np.cos(phi1)
+y1 = thept[1] + r*np.sin(theta1)*np.sin(phi1)
+z1 = thept[2] + r*np.cos(theta1)
+ax.plot_surface(x1, y1, z1,
+        linewidth=0, antialiased=True,zorder=8)
+
+ax.plot_surface(x, y, z, cmap=cm.coolwarm,
+                       linewidth=0, antialiased=True)
+print("the pt: "+str(thept)+"\n")
 ax.plot([x[ix,jx]], [y[ix,jx]], [z[ix,jx]],
         marker='.', c='blue',zorder=10)
 
