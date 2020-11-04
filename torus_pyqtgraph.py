@@ -46,10 +46,6 @@ def sphere(rows, cols, radius=1.0, offset=True):
 #z = r*np.sin(theta)
 
 def torus(rows, cols, r=1.0, R=2.0, offset=True):
-    """
-    Return a MeshData instance with vertexes and faces computed
-    for a spherical surface.
-    """
     verts = np.empty((rows+1, cols, 3), dtype=float)
     
     ## compute vertexes

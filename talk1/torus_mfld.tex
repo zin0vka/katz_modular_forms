@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm,fullpage,enumerate,bm,hyperref}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{defi}{Definition}
+\begin{document}
+\section{Shorter proof that $\mathbb{C}^n/L$ is a manifold}
+Let us assume that $L$ acts freely and properly discontinuously.
+
+Let $U\subseteq\mathbb{C}^n$ open, then
+\[\pi^{-1}(\pi(U))=\bigcup_{\lambda\in L}\lambda+U,\]
+So $\pi(U)$ is open. Pick $U$ such that $(\lambda+U)\cap U=\emptyset$ for every $\lambda\neq 0$. Then $\pi:U\to\pi(U)$ is bijective, and therefore a homeomorphism.
+
+Let $x_0+L$ be a point in $\mathbb{C}^n/L$. Take $x_0'\in x_0+L$ and let $U$ be a neighborhood of $x_0'$ making $\pi:U\to\pi(U)$ a homeomorphism.
+
+Let $\mathcal{U}=(\pi(U),\phi)$ be given by $\phi(u)=\pi^{-1}(u)$. Then $\mathcal{U}$ is a coordinate system at $x_0+L$.
+
+Suppose $(\pi(U),\phi)$ and $(\pi(V),\psi)$ are coordinate systems at $[x_0]$ and $[y_0]$ respectively. Then if $\pi(U)\cap\pi(V)\neq\emptyset$ and $a\in\pi(V)\cap\pi(U)$, we get
+\[\phi\circ\psi^{-1}(u)=\phi(\pi(u))=u,\]
+so the transition maps are holomorphic.
+
+%Let $\hat{U}=\pi^{-1}(\pi(U))$. Then $\hat{U}$ is saturated (follows from bijectivity) and hence
+%\[\pi^{-1}(\pi(\hat{U}))=\bigcup_{u\in\hat{U}}u+L.\]
+%Let now $\mathbf{f}:\hat{U}\to\mathbb{C}^n$ be defined by
+%\[\mathbf{f}(\lambda+x)=x.\]
+%This is well-defined because ``freely and properly discontinuously'' implies that the $\lambda+U$ are disjoint.
+%
+%Let $\phi(\pi(z))=z$
+\end{document}

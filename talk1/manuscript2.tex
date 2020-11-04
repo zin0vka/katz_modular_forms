@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm,fullpage,enumerate,hyperref}
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}
+\newtheorem{defi}{Definition}
+\newtheorem{theo}{Theorem}
+\newtheorem{coro}{Corollary}
+\newtheorem{prop}{Proposition}
+\begin{document}
+In this talk I'm going work towards defining modular forms in the {\it correct} way. This means using Katz' definitions. The only problem is that in order to use his definitions, you need a very solid grasp of algebraic geometry and differential geometry.
+\section{Lattices and modular forms}
+Suppose you have two linearly independent elements in the complex plane, call them $\omega_1$ and $\omega_2$. Then you can form a lattice
+\[L=\mathbb{Z}\omega_1+\mathbb{Z}\omega_2.\]
+Topologically, the quotient
+\[\mathbb{C}/L=\{\tau+L:\tau\in\mathbb{C}\},\]
+is a torus. We can see this by the homeomorphism
+\[\phi:\mathbb{C}/L\to I^2/{\sim}\text{, given by }x\omega_1+y\omega_2+L\mapsto [\mathrm{mod}(x,1),\mathrm{mod}(y,1)]_{\sim}.\]
+Recall that for an integer weight $k$, the group $\mathrm{SL}_2(\mathbb{Z})$ acts on the right on functions $f:\mathbb{H}\to\mathbb{C}$ by
+\[(f|_k\gamma)(\tau)=(c\tau+d)^{-k}f(\gamma.\tau),\]
+where $(a,b;c,d)\in\gamma\in\mathrm{SL}_2(\mathbb{Z})$ and $\gamma.\tau=(a\tau+b)/(c\tau+d)$.
+
+Classically, a modular form of integral weight $k$ and level $1$, is a holomorphic function on the upper-half plane satisfying:
+\begin{enumerate}[(i)]
+  \item $f|_k\gamma=f$ for every $\gamma\in\mathrm{SL}_2(\mathbb{Z})$, and
+  \item $f(\tau)$ is bounded as $\tau\to i\infty$.
+\end{enumerate}
+This can be expressed in terms of lattices.
+\begin{defi}[Modular form, lattice definition]
+  Let $k$ be an integer. Then a modular form of weight $k$ and level $1$ is a function $F$ on lattices in $\mathbb{C}$ satisfying:
+  \begin{enumerate}[(i)]
+    \item $F(\lambda L)=\lambda^{-k}F(L)$ for every $\lambda\in\mathbb{C}\setminus\{0\}$.
+    \item Let $\omega\in\mathbb{C}$ be fixed and define $L_\tau=\mathbb{Z}\omega+\mathbb{Z}\tau$. Then
+      \[\mathbb{C}\ni\tau\mapsto F(L_\tau)\in\mathbb{C},\]
+      is holomorphic.
+    \item With $L_\tau$ as above, then $F(L_\tau)$ is bounded as $\tau\to i\infty$.
+  \end{enumerate}
+\end{defi}
+These definitions are equivalent in the sense that given a modular form $f$ on the upper-half plane, then there's a unique modular form\footnote{Given by $\mathbb{Z}\omega_1+\mathbb{Z}\omega_2\mapsto \omega_2^{-k}f(\omega_1/\omega_2)$ for $\mathrm{Im}(\omega_1/\omega_2)>0$.} $F$ on lattices satisfying $F(\mathbb{Z}+\mathbb{Z}\tau)=f(\tau)$, and given a modular form $F$ on lattices, then there's a unique modular form\footnote{Given by $\tau\mapsto F(\mathbb{Z}+\mathbb{Z}\tau)$.} $f$ on the upper-half plane satisfying $f(\tau)=F(\mathbb{Z}+\mathbb{Z}\tau)$.
+
+Since we vaguely know that lattices and elliptic curves are equivalent, this suggest that we can view modular forms (of level $1$) as functions on elliptic curves \ldots\ somehow.
+
+This is Katz' starting point.
+\section{How do we carry the weight?}
+The way we carry the weight to the setting of elliptic curves is to associate a differential form to the curve.
+
+In this section I want to establish the necessary notions that allows us to do this for the lattice $\mathbb{C}/L$. So, what we'll do is that in more generality that complex tori $\mathbb{C}^n/L$ are complex manifolds, and then make sense of the $1$-form $dz$ on $\mathbb{C}/L$ even means.
+\subsection{Complex manifolds -- the very basics}
+For this section, I decided to use the excellent book {\it From Holomorphic Functions to Complex Manifolds} by Grauert and Fritzsche.
+
+Let's begin by defining what a complex manifold is.
+\begin{defi}[Complex coordinate system, complex coordinates]
+  An $n$-dimensional complex coordinate system $(U,\phi)$ in $X$ consists of an open set $U\subseteq X$ and a homeomorphism $\phi:U\to B$ where $B\subseteq\mathbb{C}^n$.
+
+  If $p\in X$ is a point, then a complex coordinate system $(U,\phi)$ in $X$ with $p\in U$ is called a complex coordinate system at $p$. The entries $z_i=\mathbf{z}=\phi(p)$ are called the complex coordinates of $p$ with respect to $(U,\phi)$.
+
+  If $f$ is a complex function in $U$, we view it as a function of the complex coordinates $(z_1,\dots,z_n)$ via
+  \[(z_1,\dots,z_n)\mapsto f\circ\phi^{-1}(z_1,\dots,z_n).\]
+\end{defi}
+\begin{defi}[Compatible coordinate systems]
+  Let $\mathcal{U}=(U,\phi)$ and $\mathcal{V}=(V,\psi)$ be two $n$-dimensional complex coordinate systems in a Hausdorff space $X$. Then we say that $\mathcal{U}$ and $\mathcal{V}$ are (holomorphically) compatible if $U\cap V=\emptyset$ or
+  \[\phi\circ\psi^{-1}:\psi(U\cap V)\to\phi(U\cap V),\]
+  is biholomorphic (bijective holomorphic with holomorphic inverse).
+\end{defi}
+Now we get to a notion that I believe most of you have heard of -- an atlas.
+\begin{defi}[Atlas, complex structure]
+  Let $X$ be a Hausdorff space. Then a covering of $X$ with pairwise compatible $n$-dimensional complex coordinate systems is called an $n$-dimensional complex atlas on $X$.
+
+  Two atlases $\mathcal{A}_1$ and $\mathcal{A}_2$ on $X$ are called equivalent if {\it any} two coordinate systems $(U,\phi)\in\mathcal{A}_1$ and $(V,\psi)\in\mathcal{A}_2$ are compatible.
+
+  An equivalence class of $n$-dimensional complex atlases on $X$ is called an $n$-dimensional complex structure on $X$.
+\end{defi}
+This is all we need to define a complex manifold.
+\begin{defi}[Complex manifold]
+  An $n$-dimensional complex manifold is a second-countable Hausdorff space $X$ together with an $n$-dimensional complex structure.
+\end{defi}
+The space $\mathbb{C}^n$ itself is a complex manifold.
+\begin{exmp}
+  Let $\mathbb{C}^n$ have the Euclidean topology coming from $\mathbb{R}^{2n}$. Then $\mathbb{C}^n$ is Hausdorff and second countable (take balls with rational radii and centers).
+
+  Let $\mathcal{A}=\{(\mathbb{C}^n,\mathrm{id})\}$. Since $\mathrm{id}$ is biholomorphic, it's clear that $\mathcal{A}$ is an $n$-dimensional complex atlas. Hence $[\mathcal{A}]$ is a complex structure.
+\end{exmp}
+So is any non-empty open subset of a complex manifold.
+\begin{exmp}
+  Hello!
+\end{exmp}
+
+In order to talk about, we need the notion of quotients of manifolds, and for this we need to define
+\begin{enumerate}
+  \item Holomorphic maps.
+  \item Holomorphic functions on complex manifolds.
+  \item Holomorphic mappings between complex manifolds.
+  \item Analytic subsets.
+  \item Local Jacobian.
+  \item The rank of a holomorphic map.
+%  \item Immersion and submersion.
+\end{enumerate}
+\begin{defi}[Holomorphic maps]
+  Let $B\subseteq\mathbb{C}^n$ be open. A map
+  \[\mathbf{f}=(f_1,\dots,f_m):B\to\mathbb{C}^m,\]
+  is called holomorphic if all components $f_i$ are holomorphic.
+\end{defi}
+\begin{defi}[Holomorphic functions on complex manifolds]
+  Let $X$ be an $n$-dimensional complex manifold. A complex function $f$ on an open subset $B\subseteq X$ is called holomorphic if for each $p\in B$ there is a coordinate system $(U,\phi)$ at $p$ such that
+  \[f\circ\phi^{-1}:\phi(U\cap B)\to\mathbb{C},\]
+  is holomorphic. We denote the set of holomorphic functions on $B$ by $\mathcal{O}(B)$.
+\end{defi}
+\begin{defi}[Holomorphic mappings between complex manifolds]
+  Let $X$ and $Y$ be complex manifolds and let $F:X\to Y$ be continuous. Then $F$ is called holomorphic if for any $p\in X$ there is a coordinate system $(U,\phi)$ at $p$ and a coordinate system $(V,\psi)$ at $F(p)$ with $F(U)\subseteq V$ such that
+  \[\psi\circ F\circ\phi^{-1}:\phi(U)\to \psi(V),\]
+  is a holomorphic map.
+\end{defi}
+\begin{defi}[Analytic subset]
+  Let $X$ be an $n$-dimensional complex manifold. Then a subset $A\subseteq X$ is called analytic if for each point $p\in X$ there is a connected open neighborhood $U$ of $p$ and finitely many holomorphic functions $f_1,\dots,f_m$ on $U$ such that
+  \[U\cap A=\{q\in U:f_i(q)=0\text{ for }i=1,\dots,m\}.\]
+\end{defi}
+\begin{defi}[Local Jacobian]
+  Let $f_1,\dots,f_m$ be holomorphic functions defined on an open subset $U\subseteq X$. Let $p\in U$ be a point and $(V,\psi)$ a complex coordinate system in $X$ at $p$. Then the mapping $\mathbf{f}:(f_1,\dots,f_m):U\to\mathbb{C}^m$ is holomorphic and we define
+  \[J_\mathbf{f}(p;\psi)=\Big(\frac{\partial(f_i\circ\psi^{-1})}{\partial z_j}(\psi(p))\Big)_{\substack{1\leq i\leq m\\1\leq j\leq n}},\]
+  is the local Jacobian matrix at $(V,\psi)$ and $p$.
+\end{defi}
+One can show that
+\[J_\mathbf{f}(p;\psi)=J_\mathbf{f}(p;\phi)\cdot\lambda,\]
+for some invertible matrix $\lambda$. This shows that
+\[\mathrm{rk}\,J_\mathbf{f}(p;\psi)=\mathrm{rk}\,J_\mathbf{f}(p;\phi),\]
+for any pair of coordinate systems $(U,\phi)$ and $(V,\psi)$ at $p$ in $X$. Hence we can define:
+\begin{defi}[Rank of holomorphic map]
+  Let $X$ be an $n$-dimensional complex manifold and let $U\subset X$ be an open subset. Let $\mathbf{f}:U\to\mathbb{C}^m$ be a holomorphic map. Then we write
+  \[\mathrm{rk}_p(\mathbf{f})=\mathrm{rk}(J(p;\psi)),\]
+  where $(V,\psi)$ is any coordinate system at $p$ in $X$.
+\end{defi}
+%\begin{defi}[Submersion]
+%  Let $X$ and $Y$ be complex manifolds with dimension $n$ and $m$, respectively, and let $f:X\to Y$ be a holomorphic map. 
+%\end{defi}
+\subsection{Quotients of manifolds}
+Let $X$ be an $n$-dimensional complex manifold and let $\sim$ be an equivalence relation. Then it's interesting to ask when $X/{\sim}$ carries the structure of a complex manifold such that $\pi:X\to X/{\sim}$ is a holomorphic map.
+
+This is what we'll answer in this section. Let us begin by defining ``saturated'' sets.
+\begin{defi}[Saturated set]
+  Let $X$ be a complex manifold and let $\sim$ be an equivalence relation on $X$. Let $\pi:X\to X/{\sim}$ be the projection $\pi(x)=[x]$. We call a set $A$ saturated if
+  \[\pi^{-1}(\pi(A))=A.\]
+\end{defi}
+\begin{theo}
+  Let $X$ be a complex manifold of dimension $n$, and let $\sim$ be an equivalence relation.  Suppose the following conditions hold.
+  \begin{enumerate}[(i)]
+    \item With the quotient topology, $X/{\sim}$ is Hausdorff.
+    \item For any $x_0\in X$ there exists a saturated open neighborhood $\hat{U}$ of $[x_0]$ in $X$ and a holomorphic map $\mathbf{f}:\hat{U}\to\mathbb{C}^{n-d}$ such that
+      \begin{enumerate}[(a)]
+        \item such that $\mathbf{f}^{-1}(\mathbf{f}(x))=[x]$ for all $x\in\hat{U}$.
+        \item $\mathrm{rk}_x(\mathbf{f})=n-d$ for $x\in\hat{U}$.
+      \end{enumerate}
+  \end{enumerate}
+  Then $X/{\sim}$ carries a unique structure of an $n-d$ dimensional complex manifold such that $\pi:X\to X/{\sim}$ is a holomorphic map (in fact a so-called ``submersion'').
+\end{theo}
+\begin{proof}
+  {\tt Include only the part about the complex structure.}
+\end{proof}
+The above theorem has an important corollary.
+\begin{coro}
+  Let $X$ be an $n$-dimensional complex manifold and let $G$ be a group that acts freely and properly discontinuously on $X$. Then $X/G$ has the structure of an $n$-dimensional complex manifold. (It's more or less unique, but let's not delve into this.)
+\end{coro}
+\begin{proof}
+  The fact that $G$ acts freely and properly discontinuously is what makes $X/G$ Hausdorff, so let's ignore this for now, and really try to focus on the complex structure.
+\end{proof}
+\begin{prop}
+  Let $L$ be a lattice in $\mathbb{C}^n$. Then $L$ acts freely and properly discontinously on $\mathbb{C}^n$ by translation.
+\end{prop}
+\begin{proof}
+  {\tt Definitely include.}
+\end{proof}
+Now we finally now can define complex tori.
+\begin{defi}[Complex torus]
+  Let $L$ be a lattice in $\mathbb{C}^n$. Then the $n$-dimensional complex torus associated to $L$ is the quotient manifold $\mathbb{C}^n/L$.
+\end{defi}
+\subsection{Complex differential forms on complex manifolds}
+There is a lot of interesting content here, and I won't delve into the deep stuff. In fact, I'll only consider forms on $\mathbb{C}/L$. But still, we need to define:
+\begin{enumerate}
+  \item Derivations.
+  \item Tangent vectors.
+  \item Tangent space.
+  \item Induced maps.
+\end{enumerate}
+A word on notation: if $X$ is a complex manifold and $B\subseteq X$ is open, we say that a function $f:B\to\mathbb{C}$ is smooth if for every complex coordinate system $(U,\phi)$ with $U\cap B\neq\emptyset$ it holds that $f\circ\phi^{-1}$ is smooth on $\phi(U\cap B)\subseteq\mathbb{C}^n$. The real vector space of real valued smooth functions on $B$ is denoted by $\mathcal{E}(B)$.
+\begin{defi}[Derivation]
+  Let $X$ be an $n$-dimensional manifold and let $a\in X$ be a point. Then a derivation on $X$ at $a$ is an $\mathbb{R}$-linear map $v:\mathcal{E}(X)\to\mathbb{R}$ such that
+  \[v[f\cdot g]=v[f]\cdot g(a)+f(a)\cdot v[g],\]
+  for $f,g\in\mathcal{E}(X)$.
+
+  The (real) vector space of derivations on $X$ at $a$ is denoted by $T^\mathbb{R}_a(X)$.
+\end{defi}
+The notation hints at a connection with tangent vectors, and there is an isomorphisms to the space of tangent vectors, but I want to keep it simple.
+
+The following proposition is useful.
+\begin{prop}
+  If $f\in\mathcal{E}(X)$ and $f|_U=0$ for some open neighborhood of $U$ of $a\in X$, then $v[f]=0$ for every derivation $v$ at $a$.
+\end{prop}
+\begin{proof}
+  Let $g\in\mathcal{E}(X)$ satisfy $g|_V=0$ for some neighborhood $V$ of $a$, whose closure is compact and contained in $U$; and $g|_{X\setminus U}=0$. (This is just a cut-off/mollifier function, and they are no problem to construct.)
+
+  Then $g\cdot f=f$ and also
+  \[v[f]=v[g\cdot f]=v[g]\cdot f(a)+g(a)\cdot v[f]=0,\]
+  because $a\in V\subseteq U$.
+\end{proof}
+The point of the previous proposition is that we can always restrict derivations to locally defined functions.
+\begin{coro}
+  Let $X$ be an $n$-dimensional complex manifold, and let $f,g$ be smooth functions on $X$ that agree on an open neighborhood of a point $a\in X$. Then for every derivation $v$ at $a$ it holds that $v[f]=v[g]$.
+\end{coro}
+\begin{proof}
+  Apply the previous proposition to $f-g$.
+\end{proof}
+We now extend to complex valued functions.
+\begin{defi}
+  Let $f=g+ih$ be a complex valued smooth function on the open set $B\subseteq X$ and let $v$ be a derivation at $a\in B$. Then we define
+  \[v[f]=v[g]+iv[h].\]
+\end{defi}
+This allows us to complexify $T^\mathbb{R}_a(X)$ to get $T_a(X)$.
+\begin{prop}
+  Let $J:T_a^\mathbb{R}(X)\to T_a^\mathbb{R}(X)$ satisfy
+  \[J(v)[f]=iv[f],\]
+  for every holomorphic function $f:X\to\mathbb{C}$. Then $J$ is a complex structure.
+\end{prop}
+We define $T_a(X)=(T^\mathbb{R}_a(X),J)$ and recall that $(a+ib)v=av+b\cdot J(v)$ for $a+ib\in\mathbb{C}$.
+
+\begin{defi}[Induced mapping]
+  Given a holomorphic map $F:X\to Y$ where $X$ and $Y$ are complex manifolds and a point $x\in X$, we can define a map $(F_\ast)_x:T_x(X)\to T_{F(y)}(Y)$, as follows.
+  \[(F_\ast v)[g]=v[g\circ F],\]
+  for derivations $v\in T_x(X)$ and functions $g\in\mathcal{E}(Y)$.
+
+  This is called the tangential map, or the pushforward.
+\end{defi}
+This construction actually defines a covariant functor from the category of a complex manifolds with a distinguished point to the category of vector spaces. In the sense that given $F:X\to Y$, and $a\in X$ and $b=F(a)$, then we get a linear map $(F_\ast)_a:T_a(X)\to T_b(X)$ satisfying
+\[(\mathrm{id}_X)_\ast=\mathrm{id}_{T_x(X)},\]
+and
+\[(G\circ F)_\ast=G_\ast\circ F_\ast.\]
+
+Now we're finally ready to define what we mean by $dz$, or more generally $dz_i$ for $1\leq i\leq n$, on a complex $n$-dimensional manifold $X$. First, we set
+\[T^\ast_x(X)=\mathrm{Hom}_\mathbb{R}(T_x(X),\mathbb{R}),\]
+and define $F_x(X)=T^\ast_x(X)\oplus iT^\ast_x(X)$.
+
+\begin{defi}[Differential of function]
+  Let $X$ be an $n$-dimensional complex manifold and let $x\in X$. Let $f$ be a real of complex valued function, smooth on a neighborhood of $x$. Then we define $(df)_x\in F_x(X)$ by
+  \[(df)_x(v)=v[f].\]
+  In particular, if $(z_1,\dots,z_n)$ are local coordinates at $x$, we define
+  \[dz_i=(dz_i)_x,\]
+  so that $dz_i(v)=v[z_i]$.
+\end{defi}
+That's really it, now we know theoretically what Katz' means by $dz$ on $\mathbb{C}/L$.
+\end{document}
